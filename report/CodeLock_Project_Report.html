@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodeLock Project Report</title>
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ffffff; }
+body {
+  font-family: "Segoe UI", Calibri, Arial, sans-serif;
+  color: #1f2937; font-size: 9.8pt; line-height: 1.46;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.page {
+  width: 210mm; height: 296.6mm; padding: 20mm 18mm 16mm;
+  position: relative; overflow: hidden; background: #ffffff;
+  page-break-after: always; break-after: page;
+}
+.page:last-child { page-break-after: auto; break-after: auto; }
+.page-head {
+  position: absolute; top: 8mm; left: 18mm; right: 18mm;
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 7.2pt; color: #64748b; letter-spacing: .08em; text-transform: uppercase;
+  border-bottom: 0.4pt solid #d7dee8; padding-bottom: 1.6mm;
+}
+.page-head b { color: #0b2545; font-weight: 700; letter-spacing: .12em; }
+.page-foot {
+  position: absolute; bottom: 7mm; left: 18mm; right: 18mm;
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 7.4pt; color: #64748b;
+  border-top: 0.4pt solid #e2e8f0; padding-top: 1.5mm;
+}
+.page-foot .pg { font-weight: 700; color: #0b2545; }
+.kicker {
+  font-size: 7.6pt; font-weight: 700; color: #0f766e;
+  letter-spacing: .2em; text-transform: uppercase; margin: 0 0 1.2mm;
+}
+h2.sec {
+  font-size: 17pt; line-height: 1.15; color: #0b2545;
+  margin: 0; font-weight: 700; letter-spacing: -.015em;
+}
+.rule { width: 26mm; height: 1.1mm; background: #0f766e; margin: 2.2mm 0 4.6mm; }
+h3 { font-size: 11pt; color: #0b2545; margin: 4.2mm 0 1.4mm; line-height: 1.25; }
+h4 { font-size: 9.6pt; color: #0f766e; margin: 3mm 0 1mm; }
+p { margin: 0 0 2.4mm; text-align: justify; }
+ul, ol { margin: 0 0 2.4mm 0; padding-left: 4.6mm; }
+li { margin-bottom: 1mm; text-align: justify; }
+b, strong { color: #0b2545; }
+.small { font-size: 8.6pt; color: #475569; }
+.tiny { font-size: 7.8pt; color: #64748b; }
+table { width: 100%; border-collapse: collapse; font-size: 8.3pt; line-height: 1.35; margin: 1.4mm 0 3mm; }
+th {
+  background: #0b2545; color: #ffffff; text-align: left;
+  padding: 1.6mm 1.8mm; font-weight: 600; font-size: 8pt; letter-spacing: .02em;
+}
+td { padding: 1.35mm 1.8mm; border-bottom: 0.35pt solid #dbe3ec; vertical-align: top; }
+tr:nth-child(even) td { background: #f7fafc; }
+td.c, th.c { text-align: center; }
+.compact { font-size: 7.9pt; }
+.compact td { padding: 1.05mm 1.6mm; }
+.compact th { padding: 1.3mm 1.6mm; }
+.figure { margin: 2.6mm 0 3mm; text-align: center; page-break-inside: avoid; }
+.figure img { max-width: 100%; border: 0.4pt solid #cbd5e1; background: #fff; }
+.caption { font-size: 7.8pt; color: #475569; margin-top: 1.4mm; font-style: italic; }
+.two { display: flex; gap: 6mm; align-items: flex-start; }
+.two > div { flex: 1; min-width: 0; }
+.note {
+  background: #f1f5f9; border-left: 1.1mm solid #0f766e;
+  padding: 2.4mm 3mm; font-size: 8.5pt; color: #334155; margin: 2.6mm 0 2.8mm;
+}
+.note b { color: #0b2545; }
+.warn { border-left-color: #b45309; background: #fffbeb; }
+.toc-row { display: flex; align-items: baseline; font-size: 9.6pt; padding: 1.55mm 0; border-bottom: 0.3pt solid #eef2f7; }
+.toc-row .t { white-space: nowrap; }
+.toc-row .dots { flex: 1; border-bottom: 0.35pt dotted #94a3b8; margin: 0 2.5mm 1.2mm; }
+.toc-row .pg { font-weight: 700; color: #0b2545; }
+.toc-row.front .t { color: #475569; }
+.toc-row.head { border-bottom: 0.6pt solid #0b2545; font-size: 8pt; text-transform: uppercase; letter-spacing: .12em; color: #64748b; padding-bottom: 1.2mm; }
+.toc-row.head .dots, .toc-row.head .pg { visibility: hidden; }
+.tiles { display: flex; gap: 4mm; margin-top: 5mm; }
+.tile { flex: 1; border: 0.5pt solid #d7dee8; border-top: 1.2mm solid #0f766e; padding: 2.6mm 3mm; }
+.tile .n { font-size: 15pt; font-weight: 700; color: #0b2545; line-height: 1.1; }
+.tile .l { font-size: 7.6pt; color: #64748b; text-transform: uppercase; letter-spacing: .09em; margin-top: .8mm; }
+.tile.red { border-top-color: #b91c1c; }
+.cover { padding: 0; }
+.cover-band { height: 82mm; background: #0b2545; color: #ffffff; padding: 20mm 22mm 0; position: relative; }
+.cover-band:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2.2mm; background: #0f766e; }
+.cover-univ { font-size: 12pt; font-weight: 700; letter-spacing: .22em; }
+.cover-inst { font-size: 9pt; color: #bfdbfe; margin-top: 2mm; letter-spacing: .06em; }
+.cover-mark { position: absolute; right: 22mm; top: 22mm; opacity: .92; }
+.cover-body { padding: 26mm 22mm 0; }
+.cover-kicker { font-size: 8.4pt; font-weight: 700; letter-spacing: .28em; color: #0f766e; }
+.cover-title { font-size: 38pt; line-height: 1.02; font-weight: 800; color: #0b2545; margin: 3mm 0 0; letter-spacing: -.03em; }
+.cover-sub { font-size: 14.5pt; line-height: 1.35; color: #334155; margin: 5mm 0 0; max-width: 150mm; }
+.cover-rule { width: 40mm; height: 1.4mm; background: #b91c1c; margin: 9mm 0; }
+.cover-meta { display: flex; gap: 12mm; }
+.cover-meta > div { flex: 1; }
+.cover-meta span { display: block; font-size: 7.6pt; text-transform: uppercase; letter-spacing: .16em; color: #64748b; margin-bottom: 1.6mm; }
+.cover-meta strong { display: block; font-size: 12.5pt; color: #0b2545; }
+.cover-meta em { display: block; font-style: normal; font-size: 8.8pt; color: #475569; margin-top: 1mm; }
+.cover-foot {
+  position: absolute; left: 22mm; right: 22mm; bottom: 18mm;
+  display: flex; justify-content: space-between; font-size: 9pt; color: #475569;
+  border-top: 0.5pt solid #cbd5e1; padding-top: 3mm;
+}
+.cert-frame { border: 0.9pt solid #0b2545; outline: 0.45pt solid #0f766e; outline-offset: -3.2mm; padding: 16mm 14mm 12mm; height: 244mm; }
+.cert-title { text-align: center; font-size: 22pt; letter-spacing: .3em; color: #0b2545; font-weight: 700; margin: 4mm 0 3mm; }
+.cert-sub { text-align: center; font-size: 8.4pt; letter-spacing: .18em; color: #0f766e; text-transform: uppercase; margin-bottom: 10mm; }
+.cert-body p { font-size: 10.6pt; line-height: 1.75; }
+.cert-sign { display: flex; justify-content: space-between; margin-top: 24mm; }
+.cert-sign > div { width: 70mm; border-top: 0.6pt solid #0b2545; padding-top: 2mm; font-size: 8.6pt; color: #475569; text-align: center; }
+.cert-sign b { display: block; font-size: 9.4pt; color: #0b2545; }
+.doc-title { font-size: 18pt; letter-spacing: .22em; color: #0b2545; font-weight: 700; margin: 0 0 1mm; }
+.doc-sub { font-size: 7.8pt; letter-spacing: .16em; color: #0f766e; text-transform: uppercase; margin-bottom: 7mm; }
+.code { font-family: Consolas, "Courier New", monospace; font-size: 8.2pt; background: #f1f5f9; padding: .3mm 1.1mm; border-radius: .8mm; color: #0b2545; }
+ul.tight li { margin-bottom: .6mm; }
+.two-tables { display: flex; gap: 5mm; }
+.two-tables > div { flex: 1; min-width: 0; }
+ul.checks { list-style: none; padding-left: 0; }
+ul.checks li { padding-left: 5.2mm; position: relative; }
+ul.checks li:before { content: "\2713"; position: absolute; left: 0; color: #0f766e; font-weight: 700; }
+</style>
+</head>
+<body>
+<section class="page cover" id="p1">
+<div class="cover-band">
+  <div class="cover-univ">CHANDIGARH UNIVERSITY</div>
+  <div class="cover-inst">University Institute of Computing &middot; Mohali, Punjab</div>
+  <svg class="cover-mark" width="104" height="104" viewBox="0 0 120 120" fill="none">
+    <rect x="8" y="8" width="104" height="104" rx="24" stroke="#38bdf8" stroke-width="2" opacity="0.55"/>
+    <rect x="31" y="53" width="58" height="45" rx="9" stroke="#ffffff" stroke-width="4"/>
+    <path d="M42 53V41a18 18 0 0 1 36 0v12" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="60" cy="72" r="6" fill="#0f766e"/>
+    <path d="M60 77v9" stroke="#0f766e" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+</div>
+<div class="cover-body">
+  <div class="cover-kicker">PROJECT REPORT</div>
+  <div class="cover-title">CodeLock</div>
+  <div class="cover-sub">A Study-Focused Desktop Kiosk for Exam Preparation and DSA Practice</div>
+  <div class="cover-rule"></div>
+  <div class="cover-meta">
+    <div>
+      <span>Submitted by</span>
+      <strong>Abhinandan Upadhyay</strong>
+      <em>UID: 26MCA20229 &middot; Master of Computer Applications</em>
+    </div>
+    <div>
+      <span>Under the guidance of</span>
+      <strong>Mr. Randeep Singh Dhillon</strong>
+      <em>University Institute of Computing</em>
+    </div>
+  </div>
+</div>
+<div class="cover-foot"><span>November 2026</span><span>Mohali, Punjab</span></div>
+</section><section class="page " id="p2"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Certificate</span></div>
+<div class="cert-frame">
+  <div class="doc-title" style="text-align:center">CERTIFICATE</div>
+  <div class="cert-sub">University Institute of Computing &middot; Chandigarh University</div>
+  <div class="cert-body">
+    <p>This is to certify that <b>Abhinandan Upadhyay (UID: 26MCA20229)</b>, a student of the Master of
+    Computer Applications (MCA) programme, has successfully completed the project entitled
+    <b>&ldquo;CodeLock: A Study-Focused Desktop Kiosk for Exam Preparation and DSA Practice&rdquo;</b>
+    under my supervision and guidance.</p>
+    <p>The work presented in this report is submitted in partial fulfilment of the academic requirements
+    of the MCA programme. To the best of my knowledge, the project work described herein is an authentic
+    record of the student&rsquo;s work. The report distinguishes the paths that were verified offline from
+    the privileged Windows operations that were intentionally not performed in the development
+    environment.</p>
+    <p style="margin-top:8mm">Date: ____________________<br>Place: Chandigarh University, Mohali, Punjab</p>
+  </div>
+  <div class="cert-sign">
+    <div><b>Head of the Department</b>University Institute of Computing</div>
+    <div><b>Mr. Randeep Singh Dhillon</b>Project Guide / Supervisor &middot; University Institute of Computing</div>
+  </div>
+</div>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 2</span></div></section><section class="page " id="p3"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Acknowledgement</span></div>
+<div class="doc-title">ACKNOWLEDGEMENT</div>
+<div class="doc-sub">A note of thanks</div>
+<p>I express my sincere gratitude to my project guide, <b>Mr. Randeep Singh Dhillon</b>, for his guidance,
+feedback and encouragement throughout the development of CodeLock. His suggestions during planning,
+implementation and documentation helped me separate the parts of the project that could be verified
+offline from the privileged operating-system operations that required a controlled test machine.</p>
+<p>I am thankful to the faculty members of the University Institute of Computing, Chandigarh University,
+for providing the academic environment and learning resources required to complete this project. I also
+acknowledge the support of my classmates and friends who reviewed the application and identified areas
+for improvement, particularly around the two-mode navigation and the visibility of the exam workspace.</p>
+<p>I would like to thank my family for their continuous encouragement and support. Finally, I acknowledge
+the developers and maintainers of Python, Tkinter, pypdf, psutil, python-oracledb, SQLite and PowerShell,
+whose documentation and open tools supported this work.</p>
+<div class="note"><b>A note on scope.</b> CodeLock was built as a commitment device for a student&rsquo;s own
+computer. It is not a surveillance product, a parental-control system or a security boundary. The report
+states that limitation explicitly so that the project is evaluated for what it actually does.</div>
+<p style="margin-top:18mm"><b>Abhinandan Upadhyay</b> &middot; UID 26MCA20229<br>
+Master of Computer Applications<br>
+Date: November 2026</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 3</span></div></section><section class="page " id="p4"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Abstract</span></div>
+<div class="doc-title">ABSTRACT</div>
+<div class="doc-sub">Project summary</div>
+<p>CodeLock is a Python and Tkinter desktop application that turns a student&rsquo;s own computer into a
+short, self-imposed focus session. It addresses two problems that often appear together in self-study:
+distracting websites and applications break concentration, and examination preparation frequently becomes
+passive reading without measurable feedback. After signing in, the student chooses between two modes.
+<b>Exam Preparation</b> opens a workspace in which a syllabus document is imported, its topic tree is
+reviewed and approved, study notes and a validated question bank are produced, and practice, mock
+examinations, results and topic-level analytics are available without locking the computer.
+<b>DSA Practice</b> selects the Engineering coding track and locks the PC: a verified PowerShell helper
+writes a marked block into the hosts file, a watchdog terminates a small set of blacklisted desktop
+processes, and only a solution that passes visible and hidden tests, followed by explicit student
+confirmation, releases a fifteen-minute reward.</p>
+<p>A submission runs in a separate Python interpreter under a trusted-parent protocol. The child process
+never receives expected answers, hidden cases or a verdict field; the parent reconstructs the returned
+value and performs the comparison itself. Accounts, attempts, exam workspaces, question banks and exam
+sessions are stored in SQLite by default or in Oracle through a PL/SQL package. The final offline suite
+passes 227 checks with system Python and 228 through the project virtual environment, the Analytics GUI
+smoke test passes 13 of 13 checks, and a dedicated mode-chooser flow harness passes 23 of 23 checks.
+Real UAC approval, helper installation and writes to the system hosts file were deliberately not performed
+in the development environment; those paths are represented by dry-run behaviour, temporary-file tests
+and simulated backends, and the report keeps that boundary visible.</p>
+<p class="small"><b>Keywords:</b> digital self-control, kiosk application, Python, Tkinter, coding judge,
+exam preparation, SQLite, Oracle, hosts file, responsible use.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 4</span></div></section><section class="page " id="p5"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Contents</span></div>
+<div class="kicker">Navigation</div>
+<h2 class="sec">Table of Contents</h2>
+<div class="rule"></div>
+<div class="toc-row head"><span class="t">Section</span><span class="dots"></span><span class="pg">Page</span></div><div class="toc-row front"><span class="t">Certificate</span><span class="dots"></span><span class="pg">2</span></div><div class="toc-row front"><span class="t">Acknowledgement</span><span class="dots"></span><span class="pg">3</span></div><div class="toc-row front"><span class="t">Abstract</span><span class="dots"></span><span class="pg">4</span></div><div class="toc-row front"><span class="t">Table of Contents</span><span class="dots"></span><span class="pg">5</span></div><div class="toc-row front"><span class="t">Table of Images</span><span class="dots"></span><span class="pg">6</span></div><div class="toc-row"><span class="t">1.  Project Title and Basic Information</span><span class="dots"></span><span class="pg">7</span></div><div class="toc-row"><span class="t">2.  Executive Summary and Problem Statement</span><span class="dots"></span><span class="pg">8</span></div><div class="toc-row"><span class="t">3.  Case Study Description and Methodology</span><span class="dots"></span><span class="pg">9</span></div><div class="toc-row"><span class="t">4.  System Architecture and Workflow</span><span class="dots"></span><span class="pg">10</span></div><div class="toc-row"><span class="t">5.  Implementation and Functional Modules</span><span class="dots"></span><span class="pg">12</span></div><div class="toc-row"><span class="t">6.  User Interface and Project Evidence</span><span class="dots"></span><span class="pg">14</span></div><div class="toc-row"><span class="t">7.  Local Data Design and Data Management</span><span class="dots"></span><span class="pg">18</span></div><div class="toc-row"><span class="t">8.  Side-by-Side Comparison Tables</span><span class="dots"></span><span class="pg">20</span></div><div class="toc-row"><span class="t">9.  Research / Project Gap Analysis</span><span class="dots"></span><span class="pg">21</span></div><div class="toc-row"><span class="t">10. Expected Outcomes and Evaluation Criteria</span><span class="dots"></span><span class="pg">22</span></div><div class="toc-row"><span class="t">11. Limitations and Conclusion</span><span class="dots"></span><span class="pg">23</span></div><div class="toc-row"><span class="t">12. References and Appendices</span><span class="dots"></span><span class="pg">24</span></div><div class="toc-row"><span class="t">13. GitHub Proof and Source Inventory</span><span class="dots"></span><span class="pg">25</span></div>
+<div class="tiles">
+  <div class="tile"><div class="n">25</div><div class="l">Pages</div></div>
+  <div class="tile"><div class="n">13</div><div class="l">Figures</div></div>
+  <div class="tile"><div class="n">16,570</div><div class="l">Lines of code</div></div>
+  <div class="tile red"><div class="n">23/23</div><div class="l">Flow checks</div></div>
+</div>
+<div class="note" style="margin-top:6mm"><b>How to use this report.</b> Section page numbers refer to the
+printed page number at the bottom of each page. The Table of Images on the following page lists every
+figure with its number, caption and page. Figures 2.1 and 2.2 were captured in <span class="code">--dry-run</span>
+mode, where the lock is simulated; Figures 6.1 to 6.7 were captured from the current build and a
+temporary exam database.</div>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 5</span></div></section><section class="page " id="p6"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Table of Images</span></div>
+<div class="kicker">Navigation</div>
+<h2 class="sec">Table of Images</h2>
+<div class="rule"></div>
+<p class="small">The report uses two kinds of image: diagrams drawn specifically for this document, and
+screenshots captured from the submitted CodeLock build. Each figure is numbered by the section in which
+it first appears.</p>
+<table class=""><colgroup><col style="width:15mm"><col style="width:110mm"><col style="width:22mm"><col style="width:15mm"></colgroup><thead><tr><th class="c">Figure</th><th class="">Title</th><th class="c">Type</th><th class="c">Page</th></tr></thead><tbody><tr><td class="c"><b>2.1</b></td><td class="">DSA Practice with the desktop locked and the judge console active</td><td class="c">Screenshot</td><td class="c"><b>8</b></td></tr><tr><td class="c"><b>2.2</b></td><td class="">Fifteen-minute reward countdown after a passing submission</td><td class="c">Screenshot</td><td class="c"><b>8</b></td></tr><tr><td class="c"><b>4.1</b></td><td class="">Three-layer architecture of the CodeLock application</td><td class="c">Diagram</td><td class="c"><b>10</b></td></tr><tr><td class="c"><b>4.2</b></td><td class="">Mode selection and the DSA lock, judge and reward workflow</td><td class="c">Diagram</td><td class="c"><b>11</b></td></tr><tr><td class="c"><b>6.1</b></td><td class="">Student sign-in dialog with the active storage backend</td><td class="c">Screenshot</td><td class="c"><b>14</b></td></tr><tr><td class="c"><b>6.2</b></td><td class="">Two-button mode chooser shown after sign-in</td><td class="c">Screenshot</td><td class="c"><b>14</b></td></tr><tr><td class="c"><b>6.3</b></td><td class="">Exam Preparation workspace with the syllabus tab</td><td class="c">Screenshot</td><td class="c"><b>15</b></td></tr><tr><td class="c"><b>6.4</b></td><td class="">Editable question bank generated from an approved syllabus</td><td class="c">Screenshot</td><td class="c"><b>16</b></td></tr><tr><td class="c"><b>6.5</b></td><td class="">Topic-wise practice session with immediate feedback</td><td class="c">Screenshot</td><td class="c"><b>16</b></td></tr><tr><td class="c"><b>6.6</b></td><td class="">Mock examination result with a per-topic breakdown</td><td class="c">Screenshot</td><td class="c"><b>17</b></td></tr><tr><td class="c"><b>6.7</b></td><td class="">Analytics dashboard with mastery and recommendations</td><td class="c">Screenshot</td><td class="c"><b>17</b></td></tr><tr><td class="c"><b>7.1</b></td><td class="">Relational data model used by SQLite and Oracle</td><td class="c">Diagram</td><td class="c"><b>19</b></td></tr><tr><td class="c"><b>13.1</b></td><td class="">Final offline verification summary</td><td class="c">Screenshot</td><td class="c"><b>25</b></td></tr></tbody></table>
+<div class="two" style="margin-top:4mm">
+  <div class="note"><b>Diagram figures</b> (4.1, 4.2, 7.1) are original vector drawings produced for this
+  report and embedded as SVG. They describe the implemented layers, the user workflow and the relational
+  schema.</div>
+  <div class="note warn"><b>Screenshot provenance.</b> DSA screenshots come from a dry run in which no
+  hosts entry is written. Exam screenshots come from a temporary SQLite database. No personal account
+  data appears in any figure.</div>
+</div>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 6</span></div></section><section class="page " id="p7"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 1 &middot; Project Information</span></div>
+<div class="kicker">Section 01</div>
+<h2 class="sec">Project Title and Basic Information</h2>
+<div class="rule"></div>
+<h3>1.1 Project Overview</h3>
+<p><b>Project title:</b> CodeLock: A Study-Focused Desktop Kiosk for Exam Preparation and DSA Practice.
+CodeLock is a local Python/Tkinter desktop application that combines two capabilities usually kept
+separate: a focus mode that applies an operating-system-level website block and terminates distracting
+desktop applications during a coding challenge, and an examination-preparation workspace that turns an
+imported syllabus into source-grounded notes, questions, scored practice and topic-level analytics.</p>
+<p>The focus loop is deliberately short: solve one DSA challenge, confirm the unlock after a passing
+submission, receive fifteen minutes of unrestricted use, then meet the next challenge. Exam Preparation
+applies no lock; its purpose is measurable preparation, not restriction.</p>
+<h3>1.2 Basic Project Information</h3>
+<table class="compact"><colgroup><col style="width:38mm"><col style="width:118mm"></colgroup><thead><tr><th class="">Item</th><th class="">Details</th></tr></thead><tbody><tr><td class="">Project category</td><td class="">Desktop commitment device and study workspace</td></tr><tr><td class="">Language / runtime</td><td class="">Python 3.10+ (developed on Python 3.14.7)</td></tr><tr><td class="">GUI</td><td class="">Tkinter / ttk kiosk window with a built-in code editor</td></tr><tr><td class="">Focus controls</td><td class="">Windows hosts file through a separately installed PowerShell helper; process watchdog</td></tr><tr><td class="">Coding judge</td><td class="">Trusted-parent subprocess protocol with generated hidden tests</td></tr><tr><td class="">Exam documents</td><td class="">PDF through pypdf; DOCX through the standard library; plain text</td></tr><tr><td class="">Study generation</td><td class="">Configurable Ollama, Gemini or OpenAI-compatible endpoint; no stored keys</td></tr><tr><td class="">Accounts / storage</td><td class="">SQLite by default; Oracle 19c+ with a PL/SQL package when configured</td></tr><tr><td class="">Verification</td><td class="">Offline self-test, Tk GUI smoke test and mode-chooser flow harness</td></tr><tr><td class="">Contributor</td><td class="">Abhinandan Upadhyay (26MCA20229)</td></tr><tr><td class="">Project guide</td><td class="">Mr. Randeep Singh Dhillon</td></tr></tbody></table>
+<h3>1.3 Scope</h3>
+<p><b>In scope:</b> accounts and sign-in, the two-mode chooser, an Engineering DSA session (warm-up plus
+five challenges), hidden-test grading, reward and auto-relock, website and process enforcement, syllabus
+import and approval, notes and questions, practice and mock sessions, results, analytics, SQLite/Oracle
+persistence and recovery. <b>Out of scope:</b> mobile-device control, a secure code sandbox, live
+proctoring, OCR, manual marking, password recovery and a hosted multi-user service.</p>
+<h3>1.4 Repository and Submission Note</h3>
+<p>At the time of writing, no public GitHub repository has been configured for CodeLock. This report
+therefore does not present a repository URL. The complete source folder, documentation and a verified
+backup snapshot are submitted together; Section 13 records the file inventory and backup result. A link
+that does not resolve would be weaker evidence than a clear statement of what was submitted.</p>
+<h3>1.5 How This Report Is Organised</h3>
+<p>Sections 2 and 3 cover the problem, objectives and methodology. Sections 4 and 5 describe the
+architecture and each module; Section 6 presents interface evidence and Section 7 the data design.
+Sections 8 to 11 contain comparisons, gaps, evaluation and limitations, and Sections 12 and 13 provide
+references, appendices and the source-inventory proof.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 7</span></div></section><section class="page " id="p8"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 2 &middot; Problem Statement</span></div>
+<div class="kicker">Section 02</div>
+<h2 class="sec">Executive Summary and Problem Statement</h2>
+<div class="rule"></div>
+<h3>2.1 Executive Summary</h3>
+<p>CodeLock demonstrates how a small, locally installed application can combine a credible focus contract
+with an evidence-producing study workspace. The focus contract is concrete: the hosts file contains a
+marked block for nine distracting domains, a watchdog terminates seven blacklisted desktop applications
+every 2.5 seconds, and the unlock is conditional on a coding submission that passes all hidden tests and a
+separate confirmation dialog. The study workspace is equally concrete: an uploaded syllabus becomes an
+editable topic tree, the approved tree gates generated notes and questions, and practice and mock sessions
+produce scores, per-topic accuracy and mastery indicators.</p>
+<p>The application runs as a standard user: it does not install the elevated helper, keep an elevated
+process alive or invent study content when no AI provider is available. Privileged operations are single,
+visible approvals and storage is scoped to the signed-in student.</p>
+<h3>2.2 Problem Statement</h3>
+<p>Study time on a personal computer is interrupted by low-friction escapes, while enterprise device
+management is too heavy for a student who simply wants a focused hour. Examination preparation fails
+differently: generated notes and questions appear quickly, but without a syllabus, a source reference and
+a scoring record the student cannot tell whether the material matches the course or whether understanding
+improved. CodeLock treats both as one design problem: a short commitment contract creates the session and
+a measurable workspace gives it a purpose.</p>
+<h3>2.3 Project Objectives</h3>
+<ul class="tight">
+<li>Provide a clear two-mode entry point: Exam Preparation without a lock, DSA Practice with a lock.</li>
+<li>Block distracting sites and processes only during a DSA session, then restore them after the reward.</li>
+<li>Grade submissions against hidden tests without exposing expected answers to student code.</li>
+<li>Require explicit confirmation before an unlock and restore the block automatically after fifteen minutes.</li>
+<li>Turn an uploaded syllabus into an approved topic tree, notes, a validated question bank, scored sessions
+and topic-level mastery reporting.</li>
+<li>Persist progress locally by default, with an optional shared Oracle backend, and keep privileged
+operations visible and recoverable.</li>
+</ul>
+<h3>2.4 Intended Users</h3>
+<p>MCA and engineering students preparing for examinations and coding interviews on their own Windows
+computers; instructors demonstrating a local-first application with a real test suite; and reviewers
+interested in the safety engineering around a privileged helper and untrusted submissions.</p>
+<div class="two"><div><figure class="figure"><img src="assets/fig-2-1-dsa-locked.png" style="width:70mm"><figcaption class="caption">Figure 2.1: DSA Practice with the desktop locked (dry run).</figcaption></figure></div><div><figure class="figure"><img src="assets/fig-2-2-reward.png" style="width:70mm"><figcaption class="caption">Figure 2.2: Reward countdown after a passing submission (dry run).</figcaption></figure></div></div><div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 8</span></div></section><section class="page " id="p9"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 3 &middot; Methodology</span></div>
+<div class="kicker">Section 03</div>
+<h2 class="sec">Case Study Description and Methodology</h2>
+<div class="rule"></div>
+<h3>3.1 Case Study Description</h3>
+<p>The case study is the development and local operation of CodeLock on a Windows 10 machine with a
+1366&times;768 display, Python 3.14.7, Tk 8.6 and PowerShell 5.1. The submitted folder contains
+<span class="code">main.py</span>, 19 Python modules under <span class="code">codelock/</span>, a fixed
+elevated helper, an installer, an Oracle schema and migrations: approximately 16,570 lines across Python,
+PowerShell and SQL. The application starts as a standard user, opens a sign-in dialog and then the mode
+chooser; no host or process change occurs before DSA Practice is selected. A final navigation change
+replaced the original four-track picker with the two-button chooser described here.</p>
+<h3>3.2 Development Methodology</h3>
+<ol class="tight">
+<li><b>Requirements and threat model:</b> define the modes, the unlock policy and the trust boundaries
+between the standard-user GUI, the elevated helper, the student submission and the optional AI provider.</li>
+<li><b>Core and interface:</b> build configuration, the problem bank, the judge, the hosts authority, the
+process watchdog and the Tkinter kiosk with paste and close actions trapped.</li>
+<li><b>Accounts and persistence:</b> implement PBKDF2 password storage, per-track progress and the
+SQLite/Oracle backends behind one interface.</li>
+<li><b>Exam workspace:</b> add syllabus extraction, topic approval, notes, the question bank, practice,
+mock sessions, results and analytics.</li>
+<li><b>Audit and remediation:</b> review the judge, helper verification, unlock policy and UI status
+reporting, and add regression checks for each finding.</li>
+<li><b>Verification and documentation:</b> run the offline suite, the GUI smoke test and the mode flow
+harness, then record the results and the untested boundaries.</li>
+</ol>
+<h3>3.3 Local Setup and Reproduction</h3>
+<p>The application requires Python 3.10 or later with Tkinter. From the project folder, create a virtual
+environment, install the requirements, run the offline self-test, and then launch in dry-run mode before
+using enforcement.</p>
+<table class=""><colgroup><col style="width:12mm"><col style="width:66mm"><col style="width:78mm"></colgroup><thead><tr><th class="c">Step</th><th class="">Command</th><th class="">Purpose</th></tr></thead><tbody><tr><td class="c">1</td><td class="">python -m venv .venv</td><td class="">Create the isolated environment</td></tr><tr><td class="c">2</td><td class="">pip install -r requirements.txt</td><td class="">Install pypdf, psutil and the optional Oracle driver</td></tr><tr><td class="c">3</td><td class="">python main.py --self-test</td><td class="">Run the offline verification suite</td></tr><tr><td class="c">4</td><td class="">python main.py --dry-run</td><td class="">Open the GUI with enforcement simulated</td></tr></tbody></table>
+<p class="small">The elevated helper is installed separately by an administrator; the GUI never installs
+or elevates itself. Without it, CodeLock still starts and grades challenges, but the HOSTS FILE badge
+reports the observed state and explains why blocking is unavailable.</p>
+<h3>3.4 Evidence Basis</h3>
+<p>This report uses the submitted source, README and audit records plus current-build screenshots. It
+reports the offline suite (227 checks with system Python, 228 in the virtual environment), the Tk smoke
+test (13/13) and the mode flow harness (23/23). Real UAC approval, helper installation, hosts writes,
+Oracle execution and live AI generation were not performed; Sections 9 and 11 keep that visible.</p>
+<h3>3.5 Responsible-Use Position</h3>
+<p>CodeLock is intended for a student&rsquo;s own computer, with the student&rsquo;s knowledge. It is a
+commitment device, not a monitoring tool: it collects no screenshots, keystrokes or browsing history, and
+use by another person would require informed consent.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 9</span></div></section><section class="page " id="p10"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 4 &middot; Architecture</span></div>
+<div class="kicker">Section 04</div>
+<h2 class="sec">System Architecture and Workflow</h2>
+<div class="rule"></div>
+<h3>4.1 Architecture</h3>
+<p>CodeLock is a layered desktop application. The Tkinter presentation layer owns the window, the editor,
+the judge console and the exam tabs. Application services implement grading, the problem bank, the exam
+engine, study generation and the student store. A narrow privilege boundary separates the standard-user
+application from the installed hosts helper, while the process watchdog runs inside the application and
+terminates blacklisted desktop programs. SQLite is the default store; Oracle is an optional shared
+backend.</p>
+<table class=""><colgroup><col style="width:30mm"><col style="width:72mm"><col style="width:54mm"></colgroup><thead><tr><th class="">Layer</th><th class="">Components</th><th class="">Responsibility</th></tr></thead><tbody><tr><td class="">Presentation</td><td class="">main.py; codelock/gui.py; exam_ui.py; exam_runner.py</td><td class="">Kiosk window, sign-in, mode chooser, editor, exam tabs</td></tr><tr><td class="">Application</td><td class="">judge.py; problems.py; exam_engine.py; study_generation.py</td><td class="">Grading, challenge bank, scoring, notes and questions</td></tr><tr><td class="">Data services</td><td class="">db.py; exam_analytics.py; exam_charts.py</td><td class="">Accounts, progress, sessions, analytics, charts</td></tr><tr><td class="">Privilege boundary</td><td class="">hosts_elevation.py; windows_acl.py; hosts_helper.ps1</td><td class="">Manifest and ACL verification; one-shot UAC helper</td></tr><tr><td class="">Operating system</td><td class="">Windows hosts file; ProcessKiller</td><td class="">Website block and desktop-process enforcement</td></tr><tr><td class="">Persistence</td><td class="">SQLite (default); Oracle 19c+ (optional)</td><td class="">Student, progress, exam workspace and session records</td></tr></tbody></table><figure class="figure"><img src="assets/fig-4-1-architecture.svg" style="width:152mm"><figcaption class="caption">Figure 4.1: Three-layer architecture of CodeLock, including the optional AI provider and the privileged hosts helper.</figcaption></figure>
+<p class="small">The helper is installed once by an administrator and re-verified on every elevated launch.
+The GUI never installs it, never executes the project copy and never keeps an elevated process alive.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 10</span></div></section><section class="page " id="p11"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 4 &middot; Workflow</span></div>
+<h3>4.2 Design Principles</h3>
+<ul class="tight">
+<li><b>Trusted-parent grading.</b> The GUI process owns the test data and the verdict; the submission
+receives one case at a time and never sees expected values.</li>
+<li><b>Least privilege.</b> The application runs as a standard user; each hosts change is one approved
+helper operation, not a long-running elevated service.</li>
+<li><b>Fail visible.</b> A failed or unverifiable operation reports the observed hosts state instead of
+claiming success.</li>
+<li><b>Local-first data.</b> Accounts and progress work without a server; Oracle is optional, and AI keys
+are read from the environment rather than stored.</li>
+<li><b>Honest scope.</b> The judge is not described as a security sandbox, and unverified paths are named
+in the documentation.</li>
+</ul>
+<h3>4.3 Application Workflow</h3>
+<p>After sign-in, the chooser is the only path into the application. The Exam branch opens the workspace
+with <span class="code">track=None</span>, starts no watchdog and applies no lock; closing the exam window
+exits CodeLock. The DSA branch selects the Engineering track, loads the Addition warm-up, pins the window,
+starts the watchdog and applies the hosts block. A passing submission still requires confirmation before
+the reward; declining leaves the machine locked. When the reward expires, the block returns and the next
+challenge loads.</p>
+<figure class="figure"><img src="assets/fig-4-2-workflow.svg" style="width:138mm"><figcaption class="caption">Figure 4.2: Mode selection and the DSA lock, judge, reward and relock workflow.</figcaption></figure>
+<h3>4.4 Concurrency and Lifecycle</h3>
+<p>A daemon watchdog sweeps the process blocklist and re-checks the hosts state every 2.5 seconds, posting
+results to the Tk event queue rather than touching widgets from the thread. The reward countdown uses
+Tk&rsquo;s <span class="code">after()</span> scheduler. Submissions run in a separate judge thread so the
+window remains responsive during the three-second grading limit. Shutdown stops the watchdog, terminates
+active judge workers, restores the hosts file when a block is active and then destroys the root window.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 11</span></div></section><section class="page " id="p12"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 5 &middot; Modules</span></div>
+<div class="kicker">Section 05</div>
+<h2 class="sec">Implementation and Functional Modules</h2>
+<div class="rule"></div>
+<h3>5.1 Student Accounts and Mode Selection</h3>
+<p>Accounts are created locally or in the configured Oracle schema. Passwords are hashed with
+PBKDF2-SHA256 and 200,000 iterations before storage; the database holds the hash and a random salt, never
+the plaintext. A student can create an account, sign in and resume per-track progress. After sign-in, the
+mode chooser presents <b>1. DSA Practice</b> first and <b>2. Exam Preparation</b> second. In real mode the
+chooser cannot be closed with its title-bar button; the student must select a mode. DSA Practice selects
+Engineering, opens the Addition warm-up and starts enforcement. Exam Preparation opens the workspace without
+a lock and closes CodeLock when its window closes.</p>
+<h3>5.2 Focus Mode and Process Control</h3>
+<p>The focus mode writes a delimited CodeLock block into the Windows hosts file. On Windows the write is
+performed by a fixed PowerShell helper installed under <span class="code">%ProgramFiles%\CodeLock</span>.
+Before requesting UAC, the application verifies the installation directory ACL, the manifest and the
+helper SHA-256; the helper accepts only block, unblock, status, recover and repair operations, and the
+blocked domains are compiled into it. The application re-reads the hosts file after every operation and
+reports BLOCKED, PARTIAL, DAMAGED, NOT BLOCKED or STATUS UNKNOWN. A watchdog terminates Discord, Steam,
+Spotify, WhatsApp, Telegram, Epic Games Launcher and Discord Canary every 2.5 seconds.</p>
+<h3>5.3 Coding Judge</h3>
+<p>A submission is sent over standard input to a fresh <span class="code">python -I</span> process in a
+temporary working directory. The parent owns the visible and hidden cases, sends one case at a time and
+compares the returned, type-tagged value itself. The worker never receives an expected answer, the test
+list or a hidden/sample flag. Frames use a per-session prefix and a strict order; missing, duplicate,
+extra, malformed or oversized frames are rejected. A three-second overall limit and a two-second per-case
+limit bound execution, and the process tree is terminated on timeout. On Windows the worker is assigned to
+a Job Object with a CPU limit, a 256 MiB process-memory limit and kill-on-close; on POSIX it receives its
+own process group and resource limits.</p>
+<h3>5.4 Hidden Tests and Unlock Policy</h3>
+<p>Every challenge has visible examples and 24 to 38 generated hidden cases (30 for the Addition warm-up).
+Cases are seeded for reproducibility and include edge cases such as empty input, duplicates and negative
+numbers; expected answers come from brute-force reference logic. <b>RUN SAMPLES</b> checks only the visible
+examples and cannot unlock anything. <b>SUBMIT &amp; UNLOCK PC</b> runs the full set; even a complete pass
+requires a separate confirmation. Declining the confirmation leaves the PC locked and still records the
+passing attempt.</p>
+<h3>5.5 Exam Workspace and Syllabus Approval</h3>
+<p>An Exam Preparation workspace stores the subject, course level, examination date, total marks and
+duration. A syllabus can be uploaded as PDF, DOCX or TXT, or entered as a manual outline. PDF text is
+extracted locally with pypdf; DOCX paragraph and table text uses the standard library. Extraction is
+bounded to 20 MiB per file, 500 PDF pages and 500,000 characters. The extracted unit/topic tree remains
+editable until the student approves it. Generated notes and questions are unavailable before approval,
+and changing an approved syllabus revokes approval and empties the active question bank.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 12</span></div></section><section class="page " id="p13"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 5 &middot; Modules</span></div>
+<h3>5.6 Notes and Question Bank</h3>
+<p>Notes can be generated in very short, standard or detailed styles. Each note keeps its source filename,
+unit and topic reference and a support status; topics not covered by the supplied source are marked as not
+specified rather than filled with invented content. The question bank supports multiple choice,
+true/false, fill-in, one-word, short-answer, long-answer, practical, programming and viva questions.
+Questions are validated for type, difficulty, Bloom level, answer, explanation, marks, source topic and
+duplicates before saving. Generated text remains editable, and all rows are scoped to the signed-in
+student. When no AI provider is configured, the interface shows an error and does not fall back to
+fabricated material.</p>
+<h3>5.7 Practice, Mock Examinations and Results</h3>
+<p>Practice builds a topic-wise test from the approved bank: choose one or more topics, a difficulty and a
+question count. Objective answers are checked immediately with the awarded marks, reference answer and
+explanation; written answers are stored and flagged for review. Mock examinations add a duration, an
+optional target score and a countdown that starts when the session opens. Answers can be changed until
+submission, and the paper submits automatically when time runs out. Each session snapshots its questions,
+so later edits to the bank cannot alter a paper in progress or already submitted.</p>
+<h3>5.8 Results and Analytics</h3>
+<p>The Results tab lists every session with score, accuracy and review count. A finished session opens a
+per-topic breakdown and a full answer review. Analytics reads only submitted sessions; abandoned or
+in-progress sessions never affect the figures. A topic needs at least five graded answers before it is
+classified as critical (below 45%), weak (below 60%), developing (below 75%) or strong (75% and above).
+A recent drop of 15 points is called out separately. Mastery is <i>Not Started</i>, <i>Needs Improvement</i>,
+<i>Learning</i> or <i>Mastered</i> (at least 8 graded answers and 80% accuracy with no decline). The range
+filter covers the last 7 days, the last 30 days or all time and applies to every card, chart, table and
+recommendation. Written answers awaiting review are excluded from accuracy rather than counted as wrong.</p>
+<h3>5.9 Persistence: SQLite and Oracle</h3>
+<p>SQLite is created automatically at <span class="code">data/codelock.db</span>. When
+<span class="code">CODELOCK_ORACLE_DSN</span> is set and the driver connects, the same logical schema is
+served by Oracle through the <span class="code">codelock_api</span> PL/SQL package. Normalized question and
+session rows are derived from the approved question JSON by <span class="code">sync_question_bank</span>;
+the JSON remains the editable source document. Exam migrations are provided for an existing Oracle schema.</p>
+<h3>5.10 Safety, Recovery and Emergency Exit</h3>
+<p>The first modification saves <span class="code">hosts.codelock.bak</span>. The helper writes a temporary
+file in the same directory, flushes it, replaces the hosts file atomically, preserves its encoding and
+newline style and re-reads the result. Damaged markers can be repaired; <span class="code">--restore</span>
+removes exact CodeLock markers and managed lines while preserving unrelated entries. If a result cannot be
+verified, the application reports the observed state and writes a recovery note with the exact command.
+The emergency exit (Ctrl+Alt+Shift+Q or the on-screen button) restores website access and quits; when an
+admin password is configured, it is required. The watchdog never opens a UAC prompt on its own.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 13</span></div></section><section class="page " id="p14"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 6 &middot; Interface</span></div>
+<div class="kicker">Section 06</div>
+<h2 class="sec">User Interface and Project Evidence</h2>
+<div class="rule"></div>
+<h3>6.1 Sign-In and Mode Selection</h3>
+<p>The sign-in dialog is the first screen. It reports which storage backend is active, so a reviewer can
+see whether the session is using SQLite or Oracle before creating an account. The mode chooser then
+presents the two journeys as full-width buttons with a short description, a consequence line and a colour
+cue: green for Exam Preparation, red for DSA Practice. The chooser is intentionally modal; closing it does
+not dismiss the application in real mode.</p>
+<div class="two">
+  <div><figure class="figure"><img src="assets/fig-6-1-login.png" style="width:72mm"><figcaption class="caption">Figure 6.1: Student sign-in dialog with the active storage backend.</figcaption></figure></div>
+  <div><figure class="figure"><img src="assets/fig-6-2-mode-chooser.png" style="width:88mm"><figcaption class="caption">Figure 6.2: Two-button mode chooser shown after sign-in.</figcaption></figure></div>
+</div>
+<h3>Interface Characteristics</h3>
+<ul class="checks tight">
+<li>The window remains above other windows during a DSA session and re-asserts itself every 1.5 seconds.</li>
+<li>The title-bar close action, Alt+F4 and paste shortcuts are trapped while the PC is locked.</li>
+<li>The judge console reports sample runs, hidden-test progress, elapsed time and saved progress.</li>
+<li>The exam workspace uses seven tabs so that long forms do not compete for one screen.</li>
+<li>Error messages name the observed state and the next action instead of hiding a failed operation.</li>
+<li>Dry-run mode uses a distinct header and simulated badges so a demonstration cannot be mistaken for a
+real lock.</li>
+</ul>
+<div class="note"><b>Reading the screenshots.</b> Figures 6.1 and 6.2 were captured from the current build.
+The DSA screenshots in Section 2 and the exam screenshots below were captured in a temporary environment;
+no personal account data, host entry or desktop process was touched.</div>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 14</span></div></section><section class="page " id="p15"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 6 &middot; Interface</span></div>
+<h3>6.2 Exam Preparation Workspace</h3>
+<p>Figure 6.3 shows the workspace after a syllabus has been imported and approved. The header carries the
+subject, course level, examination date, total marks and duration, while the tabs separate the syllabus,
+notes, question bank, practice, mock examination, results and analytics. The topic tree on the left is the
+same structure that gates generation; a topic that is not approved cannot silently become a question.</p>
+<figure class="figure"><img src="assets/fig-6-3-exam-workspace.png" style="width:150mm"><figcaption class="caption">Figure 6.3: Exam Preparation workspace with the syllabus tab and approved topic tree.</figcaption></figure>
+<h4>Workspace tabs and their evidence</h4>
+<table class=""><colgroup><col style="width:24mm"><col style="width:78mm"><col style="width:54mm"></colgroup><thead><tr><th class="">Tab</th><th class="">What the student can do</th><th class="">Evidence produced</th></tr></thead><tbody><tr><td class="">Syllabus</td><td class="">Upload PDF/DOCX/TXT, edit units and topics, save a draft, approve</td><td class="">Approved topic tree and source text</td></tr><tr><td class="">Notes</td><td class="">Generate very short, standard or detailed revision notes</td><td class="">Source filename, topic reference, support status</td></tr><tr><td class="">Question Bank</td><td class="">Generate, edit, validate and save nine question types</td><td class="">Normalized rows and a bank fingerprint</td></tr><tr><td class="">Practice</td><td class="">Choose topics, difficulty and count; answer with immediate feedback</td><td class="">Scored practice session and per-question review</td></tr><tr><td class="">Mock Exam</td><td class="">Choose topics, difficulty, count, duration and target marks</td><td class="">Timed session with a question snapshot</td></tr><tr><td class="">Results</td><td class="">Open submitted or in-progress sessions</td><td class="">Score, accuracy, review count and per-topic breakdown</td></tr><tr><td class="">Analytics</td><td class="">Filter by 7 days, 30 days or all time</td><td class="">Accuracy, mastery, trends, recommendations</td></tr></tbody></table>
+<p class="small">Generation is gated by approval: before the syllabus is approved, the notes and question
+actions remain unavailable. Saving an unchanged draft only refreshes the timestamp; changing the syllabus
+revokes approval and empties the active bank.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 15</span></div></section><section class="page " id="p16"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 6 &middot; Interface</span></div>
+<h3>6.3 Question Bank and Practice</h3>
+<p>Figure 6.4 shows the question bank after generation from an approved syllabus. Each row carries its
+unit, topic, type, difficulty, Bloom level, marks and source reference, and the bank can still be edited
+before a session uses it. Figure 6.5 shows a topic-wise practice session: objective answers are scored
+immediately with the awarded marks, the reference answer and an explanation, while written answers are
+stored for later review.</p>
+<figure class="figure"><img src="assets/fig-6-4-question-bank.png" style="width:122mm"><figcaption class="caption">Figure 6.4: Editable question bank generated from an approved syllabus.</figcaption></figure><figure class="figure"><img src="assets/fig-6-5-practice.png" style="width:122mm"><figcaption class="caption">Figure 6.5: Topic-wise practice session with immediate objective feedback.</figcaption></figure>
+<div class="note"><b>Why a validated bank matters.</b> A generated question is only useful if its type,
+answer, marks, Bloom level and source topic are coherent. CodeLock rejects duplicate or malformed rows
+before they reach a session, and it keeps the approved JSON as the editable source while normalized rows
+support filtering and scoring.</div>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 16</span></div></section><section class="page " id="p17"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 6 &middot; Interface</span></div>
+<h3>6.4 Mock Results and Analytics</h3>
+<p>Figure 6.6 shows a submitted mock examination with a per-topic breakdown: questions, correct, incorrect,
+needs review, unanswered, marks, awarded marks and accuracy. Figure 6.7 shows the analytics dashboard with
+stat cards, a topic table, a session-trend chart and recommendations. The range selector applies to every
+element on the tab, so a seven-day view cannot mix in older sessions.</p>
+<figure class="figure"><img src="assets/fig-6-6-result.png" style="width:112mm"><figcaption class="caption">Figure 6.6: Mock examination result with a per-topic breakdown and answer review.</figcaption></figure><figure class="figure"><img src="assets/fig-6-7-analytics.png" style="width:124mm"><figcaption class="caption">Figure 6.7: Analytics dashboard with mastery indicators and a topic recommendation.</figcaption></figure>
+<p class="small">The dashboard deliberately hides overall accuracy and trend results until at least five
+graded answers exist. A recommendation appears only for a topic classified as <i>Needs Improvement</i>
+with at least five graded answers; otherwise the topic is listed under evidence needed. This prevents a
+single lucky or unlucky answer from being presented as a learning diagnosis.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 17</span></div></section><section class="page " id="p18"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 7 &middot; Data Design</span></div>
+<div class="kicker">Section 07</div>
+<h2 class="sec">Local Data Design and Data Management</h2>
+<div class="rule"></div>
+<h3>7.1 Data Overview</h3>
+<p>CodeLock uses one logical schema with two physical backends. SQLite is the default and requires no
+server; Oracle 19c+ is optional and is used when a DSN and credentials are configured. The schema separates
+account and progress data from exam content, and every exam table carries a student identifier so that a
+query can enforce ownership rather than filtering in the interface after loading another student&rsquo;s
+rows.</p>
+<h3>7.2 Core Account and Progress Tables</h3>
+<table class=""><colgroup><col style="width:24mm"><col style="width:84mm"><col style="width:48mm"></colgroup><thead><tr><th class="">Table</th><th class="">Key columns</th><th class="">Purpose</th></tr></thead><tbody><tr><td class="">students</td><td class="">id, username, display_name, password_hash, salt, created_at, last_login</td><td class="">One row per account; username is unique and normalized</td></tr><tr><td class="">progress</td><td class="">student_id, track_key, current_index, completed, attempts, total_seconds, best_seconds</td><td class="">One row per student and track; resumes the saved challenge</td></tr><tr><td class="">attempts</td><td class="">id, student_id, track_key, problem_key, duration_seconds, passed, tests_passed, tests_total</td><td class="">One row per graded submission; supports history and best time</td></tr></tbody></table>
+<h3>7.3 Exam Workspace and Session Tables</h3>
+<table class=""><colgroup><col style="width:26mm"><col style="width:96mm"><col style="width:34mm"></colgroup><thead><tr><th class="">Table</th><th class="">Key columns</th><th class="">Purpose</th></tr></thead><tbody><tr><td class="">exam_workspaces</td><td class="">workspace_id, student_id, subject, course_level, exam_date, total_marks, duration_minutes, source_text, topics_json, notes_json, questions_json, fingerprint</td><td class="">Workspace metadata and the editable source documents</td></tr><tr><td class="">exam_questions</td><td class="">question_id, workspace_id, student_id, unit_title, topic, type, difficulty, bloom_level, prompt, options_json, answer, source_quote</td><td class="">Normalized question bank rows derived from approved JSON</td></tr><tr><td class="">exam_sessions</td><td class="">session_id, student_id, workspace_id, mode, status, blueprint_json, total_marks, score_marks, needs_review, duration_limit</td><td class="">Practice or mock session with its configuration and result</td></tr><tr><td class="">exam_responses</td><td class="">response_id, session_id, question_id, student_answer, is_correct, awarded_marks, review_status, question_snapshot_json</td><td class="">One row per session question, including the frozen snapshot</td></tr></tbody></table>
+<h3>7.4 Storage Backends</h3>
+<table class=""><colgroup><col style="width:28mm"><col style="width:66mm"><col style="width:62mm"></colgroup><thead><tr><th class="">Aspect</th><th class="">SQLite (default)</th><th class="">Oracle 19c+ (optional)</th></tr></thead><tbody><tr><td class="">Setup</td><td class="">Created automatically at data/codelock.db</td><td class="">Run database/schema.sql and set three environment variables</td></tr><tr><td class="">Sharing</td><td class="">Per machine and per user account</td><td class="">Shared across computers through the database</td></tr><tr><td class="">Access control</td><td class="">Anyone with file access can read or alter it</td><td class="">Depends on the database account and network</td></tr><tr><td class="">Use case</td><td class="">Single-student local use and demonstrations</td><td class="">Several computers that must share accounts and progress</td></tr></tbody></table><div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 18</span></div></section><section class="page " id="p19"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 7 &middot; Data Design</span></div>
+<h3>7.5 Relational Model</h3>
+<p>Figure 7.1 shows the seven tables and their relationships. The students table is the ownership root;
+progress and attempts are keyed by student and track, while workspaces, questions, sessions and responses
+fan out from a workspace. Sessions retain their own question snapshots so that editing the bank cannot
+rewrite history.</p>
+<figure class="figure"><img src="assets/fig-7-1-data-model.svg" style="width:146mm"><figcaption class="caption">Figure 7.1: Relational data model shared by SQLite and Oracle.</figcaption></figure>
+<h3>7.6 Ownership, Isolation and Privacy</h3>
+<p>Analytics and result queries filter by both student and workspace, so one account cannot read another
+student&rsquo;s history even if it guesses an identifier. Passwords are stored only as PBKDF2-SHA256 hashes
+with random salts. The SQLite file is not encrypted, and anyone with access to it can read or modify it;
+the Oracle path is only as secure as the database account and network it is given. AI providers receive
+only the extracted source excerpts needed for the selected topics, and API keys are read from environment
+variables rather than written to the database. Remote providers should not be used with confidential
+syllabus material; the local Ollama option keeps generation on the machine.</p>
+<h3>7.7 Migration, Reset and Retention</h3>
+<p>Fresh Oracle installations receive the exam tables from <span class="code">database/schema.sql</span>;
+existing schemas apply migrations 001 and 002 once. SQLite creates its tables on first use. Deleting the
+SQLite file resets all local accounts and content; changing <span class="code">CODELOCK_DB_PATH</span> or
+<span class="code">CODELOCK_DATA_DIR</span> selects a different store. There is no automatic retention or
+purge policy, so a deployment should decide how long student records are kept.</p>
+<div class="note warn"><b>Data boundary.</b> Student answers and generated study material are personal
+academic records. They should be collected only from students who know what is stored, where it is stored
+and how to remove it.</div>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 19</span></div></section><section class="page " id="p20"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 8 &middot; Comparisons</span></div>
+<div class="kicker">Section 08</div>
+<h2 class="sec">Side-by-Side Comparison Tables</h2>
+<div class="rule"></div>
+<h3>8.1 Focus and Locking Approaches</h3>
+<table class="compact"><colgroup><col style="width:28mm"><col style="width:40mm"><col style="width:42mm"><col style="width:46mm"></colgroup><thead><tr><th class="">Feature</th><th class="">Manual willpower</th><th class="">Browser extension</th><th class="">CodeLock</th></tr></thead><tbody><tr><td class="">Scope</td><td class="">No enforcement</td><td class="">Browser tabs and sites</td><td class="">Hosts file plus seven desktop processes</td></tr><tr><td class="">Unlock condition</td><td class="">None</td><td class="">Timer or a settings toggle</td><td class="">All hidden tests pass and the student confirms</td></tr><tr><td class="">Active session</td><td class="">Self-managed</td><td class="">Usually a timer</td><td class="">Challenge-based; reward is 15 minutes</td></tr><tr><td class="">Evidence</td><td class="">None</td><td class="">Usage summary</td><td class="">Attempt history, elapsed time, pass/fail and tests passed</td></tr><tr><td class="">Privilege</td><td class="">None</td><td class="">Browser permission</td><td class="">One approved helper operation per hosts change</td></tr><tr><td class="">Failure mode</td><td class="">Distraction</td><td class="">Disabled extension or a new browser</td><td class="">Reports the observed state; does not claim a block</td></tr></tbody></table>
+<h3>8.2 Coding Assessment Approaches</h3>
+<table class="compact"><colgroup><col style="width:34mm"><col style="width:36mm"><col style="width:38mm"><col style="width:48mm"></colgroup><thead><tr><th class="">Aspect</th><th class="">Sample-only checker</th><th class="">Online judge</th><th class="">CodeLock judge</th></tr></thead><tbody><tr><td class="">Hidden tests</td><td class="">No</td><td class="">Usually</td><td class="">24 to 38 generated cases per submission</td></tr><tr><td class="">Expected answers in the worker</td><td class="">Often present</td><td class="">Server-side</td><td class="">Never; the parent owns and compares them</td></tr><tr><td class="">Forged verdict</td><td class="">Possible</td><td class="">Server-side</td><td class="">Rejected by frame order, prefix and type checks</td></tr><tr><td class="">Timeout</td><td class="">Varies</td><td class="">Server policy</td><td class="">3 s overall and 2 s per case; process tree terminated</td></tr><tr><td class="">Isolation claim</td><td class="">None</td><td class="">Server sandbox</td><td class="">Separate interpreter and Job Object, explicitly not a sandbox</td></tr><tr><td class="">Unlock coupling</td><td class="">None</td><td class="">None</td><td class="">A pass still requires explicit confirmation</td></tr></tbody></table>
+<h3>8.3 Exam Preparation Approaches</h3>
+<table class="compact"><colgroup><col style="width:30mm"><col style="width:34mm"><col style="width:44mm"><col style="width:48mm"></colgroup><thead><tr><th class="">Feature</th><th class="">Static notes</th><th class="">General chat assistant</th><th class="">CodeLock workspace</th></tr></thead><tbody><tr><td class="">Syllabus grounding</td><td class="">Manual</td><td class="">Prompt-dependent</td><td class="">Imported syllabus and approved topic tree</td></tr><tr><td class="">Source reference</td><td class="">Sometimes</td><td class="">Rarely</td><td class="">Filename, unit and topic on generated content</td></tr><tr><td class="">Question validation</td><td class="">Manual</td><td class="">None</td><td class="">Type, marks, answer, Bloom level and duplicate checks</td></tr><tr><td class="">Practice and mock</td><td class="">Separate tools</td><td class="">Ad hoc</td><td class="">Scored sessions with snapshots and auto-submit</td></tr><tr><td class="">Analytics</td><td class="">None</td><td class="">None</td><td class="">Accuracy, mastery, trends and evidence-based recommendations</td></tr><tr><td class="">Unsupported topics</td><td class="">May be omitted</td><td class="">May be invented</td><td class="">Marked as not specified in the source</td></tr></tbody></table>
+<p class="small">These tables position the implemented feature set against common approaches. They do not
+rank commercial products, and they do not claim that CodeLock is a replacement for an institutional
+learning platform or a production online judge.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 20</span></div></section><section class="page " id="p21"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 9 &middot; Gap Analysis</span></div>
+<div class="kicker">Section 09</div>
+<h2 class="sec">Research / Project Gap Analysis</h2>
+<div class="rule"></div>
+<p>The following gaps are stated in the project documentation or follow directly from the implemented
+scope. They are not confirmed defects in unseen code; they identify what a larger deployment would need.</p>
+<table class=""><colgroup><col style="width:62mm"><col style="width:60mm"><col style="width:42mm"></colgroup><thead><tr><th class="">Observed gap or constraint</th><th class="">Implication</th><th class="">Potential improvement</th></tr></thead><tbody><tr><td class="">Real UAC approval, helper installation and hosts writes were not performed in development</td><td class="">Windows enforcement is demonstrated, not certified</td><td class="">Supervised pilot on a dedicated PC with an administrator present</td></tr><tr><td class="">Hosts blocking can be bypassed by DNS-over-HTTPS, a VPN or direct IP access</td><td class="">The block is a commitment device, not a firewall</td><td class="">Add an OS firewall policy as a second layer</td></tr><tr><td class="">The judge is not a security sandbox</td><td class="">Hostile code must not be run</td><td class="">Use a VM, AppContainer or Windows Sandbox for untrusted code</td></tr><tr><td class="">Enforcement is Windows-first</td><td class="">Linux blocking is limited without a privileged service</td><td class="">Provide a platform-specific privileged service</td></tr><tr><td class="">Oracle was verified through schema and fallback inspection, not a live instance</td><td class="">The shared-database path is unproven at runtime</td><td class="">Run a staging Oracle instance and a full integration test</td></tr><tr><td class="">No manual marking screen for written answers</td><td class="">Accuracy covers objective answers only</td><td class="">Add a marking workflow and recompute accuracy</td></tr><tr><td class="">No AI provider was used in the final check</td><td class="">Generated notes and questions are demonstrated through stubs</td><td class="">Evaluate a configured provider on a real syllabus</td></tr><tr><td class="">No password-recovery flow</td><td class="">A forgotten password means a new account or a manual row edit</td><td class="">Add an administrator reset path</td></tr><tr><td class="">Analytics are informational, not scheduled</td><td class="">No spaced-repetition plan is produced</td><td class="">Add a revision scheduler driven by mastery data</td></tr><tr><td class="">SQLite is local to one machine</td><td class="">Accounts do not sync by default</td><td class="">Pilot the Oracle backend for a shared lab</td></tr></tbody></table>
+<div class="note"><b>Priority reading.</b> The first two rows matter most for an honest evaluation: CodeLock
+has not been certified against a real Windows hosts file in this environment, and no hosts-file block can
+stop every network path. The project is designed to make those limits visible rather than to hide them.</div>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 21</span></div></section><section class="page " id="p22"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 10 &middot; Evaluation</span></div>
+<div class="kicker">Section 10</div>
+<h2 class="sec">Expected Outcomes and Evaluation Criteria</h2>
+<div class="rule"></div>
+<p>The project is evaluated on observable behaviour rather than on feature count. Each criterion below has
+a corresponding check in the offline suite, the GUI smoke test, the mode flow harness or the dry-run
+walkthrough.</p>
+<table class=""><colgroup><col style="width:28mm"><col style="width:94mm"><col style="width:36mm"></colgroup><thead><tr><th class="">Area</th><th class="">Expected result or criterion</th><th class="">Evidence</th></tr></thead><tbody><tr><td class="">Accounts</td><td class="">Create and sign in; reject duplicate usernames and wrong passwords; store hashes only</td><td class="">Self-test</td></tr><tr><td class="">Mode chooser</td><td class="">DSA first, Exam second; X blocked; closing Exam exits CodeLock</td><td class="">23/23 flow harness</td></tr><tr><td class="">DSA lock</td><td class="">Apply the block, verify the observed state and report honestly when unavailable</td><td class="">Dry run and simulated backends</td></tr><tr><td class="">Judge</td><td class="">All 15 reference solutions pass; wrong, malformed and forged submissions fail</td><td class="">Self-test</td></tr><tr><td class="">Hidden tests</td><td class="">24 to 38 cases per submission; visible samples alone cannot unlock</td><td class="">Self-test and dry run</td></tr><tr><td class="">Reward</td><td class="">15-minute countdown, auto-relock, next challenge loaded, editor reset</td><td class="">Dry run</td></tr><tr><td class="">Syllabus import</td><td class="">TXT, DOCX and PDF extraction with the stated size, page and character bounds</td><td class="">Self-test</td></tr><tr><td class="">Approval gate</td><td class="">Generation blocked before approval; a changed syllabus revokes approval</td><td class="">Self-test</td></tr><tr><td class="">Practice and mock</td><td class="">Immediate objective feedback, timed auto-submit, frozen question snapshots</td><td class="">Self-test and GUI smoke test</td></tr><tr><td class="">Analytics</td><td class="">Submitted sessions only; five-answer minimum; 7/30/all-time filters</td><td class="">13/13 UI smoke test</td></tr><tr><td class="">Persistence</td><td class="">Progress resumes after restart; student and workspace isolation</td><td class="">Self-test</td></tr><tr><td class="">Build health</td><td class="">py_compile clean; 227/228 self-tests; 13/13 UI; 23/23 flow</td><td class="">Final offline check</td></tr></tbody></table>
+<h3>Final Verification Summary</h3>
+<table class=""><colgroup><col style="width:62mm"><col style="width:24mm"><col style="width:72mm"></colgroup><thead><tr><th class="">Command</th><th class="">Result</th><th class="">Scope</th></tr></thead><tbody><tr><td class="">python -m py_compile</td><td class="">Exit 0</td><td class="">All Python modules</td></tr><tr><td class="">python main.py --self-test</td><td class="">227/227</td><td class="">Hosts, helper, judge, problems, database, exam, analytics</td></tr><tr><td class="">.venv/bin/python.exe main.py --self-test</td><td class="">228/228</td><td class="">Adds the two pypdf PDF-extraction checks</td></tr><tr><td class="">python main.py --self-test-ui</td><td class="">13/13</td><td class="">Analytics tab, filters, recommendation action</td></tr><tr><td class="">Mode-chooser flow harness</td><td class="">23/23</td><td class="">Temporary database; no privileged operation</td></tr></tbody></table>
+<p class="small">The suite was run on 2026-11-01 and the flow harness on 2026-11-02. The real hosts file was
+hash-checked before and after and was not modified. A real UAC prompt was not approved, the helper was not
+installed and no real desktop application was killed.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 22</span></div></section><section class="page " id="p23"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 11 &middot; Limitations</span></div>
+<div class="kicker">Section 11</div>
+<h2 class="sec">Limitations and Conclusion</h2>
+<div class="rule"></div>
+<h3>11.1 Limitations</h3>
+<p>CodeLock is a compact academic prototype and a commitment device, not a prison or a security product.
+It stops impulsive tab-switching and app-opening, not a determined user. Anyone with administrator rights
+can edit the hosts file, replace the helper or uninstall Python. The window is topmost but not a
+full-screen operating-system kiosk; Alt+Tab still works. Hosts blocking does not stop DNS-over-HTTPS, VPNs
+or direct IP access, and force-killing CodeLock stops the process watchdog.</p>
+<p>The judge runs as the same user in a separate interpreter with resource limits; it is not a security
+sandbox. Student code can still attempt to read files or automate input, so hostile code must not be run.
+The real UAC prompt, the <span class="code">%ProgramFiles%</span> installation, writes to the system hosts
+file and desktop-process termination were not exercised in the development environment; the PowerShell
+helper was tested against temporary files only. The Oracle backend and a live AI provider were not
+executed. There is no OCR for scanned PDFs, no manual marking screen, no password recovery and no
+spaced-repetition scheduler. Analytics accuracy covers auto-graded objective answers only, so a fully
+marked paper could show a lower figure.</p>
+<h3>11.2 What the Project Demonstrates</h3>
+<p>The project demonstrates a complete, locally runnable loop in which a focus contract and a study
+workspace share one account and one database. It shows a trusted-parent judge that resists forged verdicts
+and type confusion, a privileged helper that is verified before every elevation, an exam pipeline that
+keeps generated material tied to an approved syllabus, and an analytics layer that refuses to diagnose a
+topic from too few answers. It also demonstrates a documentation discipline: the verified results and the
+unverified boundaries are recorded separately.</p>
+<h3>11.3 Conclusion</h3>
+<p>CodeLock meets its stated goal: a student can sit down, choose Exam Preparation for measurable study or
+DSA Practice for a locked coding session, and leave with a record of what was attempted. The two-mode
+chooser makes the consequence of each choice explicit before any enforcement begins. The project is
+small enough to inspect, honest about its limits and structured so that the next step, a supervised pilot
+on a real Windows machine, can be evaluated without changing the core design.</p>
+<h3>11.4 Future Work</h3>
+<ul class="tight">
+<li>Run a supervised Windows pilot covering real UAC approval, helper installation and a verified restore.</li>
+<li>Add a marking screen and a mastery-aware revision scheduler.</li>
+<li>Evaluate a configured AI provider on real syllabi and add a content-quality rubric.</li>
+<li>Pilot the Oracle backend in a shared lab and add account recovery.</li>
+<li>Add an OS firewall layer for network paths that hosts blocking cannot cover.</li>
+</ul>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 23</span></div></section><section class="page " id="p24"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 12 &middot; References</span></div>
+<div class="kicker">Section 12</div>
+<h2 class="sec">References and Appendices</h2>
+<div class="rule"></div>
+<h3>References</h3>
+<ol class="tight small">
+<li>CodeLock project README and final submission report, submitted with the source folder (setup, features, verification and limitations).</li>
+<li>Python Software Foundation. <i>The Python Tutorial</i> and <i>Python Standard Library</i>. https://docs.python.org/3/</li>
+<li>Python Software Foundation. <i>tkinter &mdash; Python interface to Tcl/Tk</i>. https://docs.python.org/3/library/tkinter.html</li>
+<li>pypdf contributors. <i>pypdf documentation</i>. https://pypdf.readthedocs.io/</li>
+<li>psutil contributors. <i>psutil documentation</i>. https://psutil.readthedocs.io/</li>
+<li>Oracle. <i>python-oracledb documentation</i>. https://python-oracledb.readthedocs.io/</li>
+<li>SQLite. <i>SQLite Documentation</i>. https://www.sqlite.org/docs.html</li>
+<li>Microsoft. <i>File.Replace Method</i>. https://learn.microsoft.com/dotnet/api/system.io.file.replace</li>
+<li>Moriarty, K. (Ed.). <i>RFC 8018: PKCS #5: Password-Based Cryptography Specification Version 2.1</i>. https://www.rfc-editor.org/rfc/rfc8018</li>
+<li>OWASP. <i>Password Storage Cheat Sheet</i>. https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html</li>
+</ol>
+<h3>Appendix A: Project Folder Structure</h3>
+<table class=""><colgroup><col style="width:62mm"><col style="width:92mm"></colgroup><thead><tr><th class="">File or folder</th><th class="">Purpose</th></tr></thead><tbody><tr><td class="">main.py</td><td class="">Entry point, command-line flags, restore, self-test and UI smoke test</td></tr><tr><td class="">codelock/gui.py</td><td class="">Kiosk window, sign-in, mode chooser, watchdog, reward timer</td></tr><tr><td class="">codelock/judge.py</td><td class="">Subprocess harness, strict protocol, timeout and worker cleanup</td></tr><tr><td class="">codelock/problems.py</td><td class="">Track registry, 15 challenges and hidden-test generators</td></tr><tr><td class="">codelock/exam_ui.py; exam_runner.py</td><td class="">Workspace tabs and practice/mock runner windows</td></tr><tr><td class="">codelock/exam_engine.py; exam_analytics.py</td><td class="">Question selection, scoring, mastery and trends</td></tr><tr><td class="">codelock/db.py</td><td class="">Accounts, progress, exam rows, SQLite and Oracle backends</td></tr><tr><td class="">codelock/hosts_helper.ps1; hosts_elevation.py</td><td class="">Fixed elevated helper and one-shot verification/UAC client</td></tr><tr><td class="">codelock/selftest.py; ui_smoke.py</td><td class="">Offline verification and temporary-database GUI smoke test</td></tr><tr><td class="">database/schema.sql; database/migrations/</td><td class="">Oracle student and exam schema, view and PL/SQL package</td></tr><tr><td class="">tools/install_hosts_helper.ps1</td><td class="">Administrator installer, manifest writer and ACL setup</td></tr></tbody></table>
+<h3>Appendix B: Submission Note</h3>
+<p class="small">The complete source folder, this report and the documentation files are submitted together.
+Section 13 records the source inventory and the verified backup snapshot. The project does not include a
+public repository URL because none was configured at the time of writing.</p>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 24</span></div></section><section class="page " id="p25"><div class="page-head"><span><b>CodeLock</b> &middot; Project Report</span><span>Section 13 &middot; Source Proof</span></div>
+<div class="kicker">Section 13</div>
+<h2 class="sec">GitHub Proof and Source Inventory</h2>
+<div class="rule"></div>
+<h3>13.1 Status of the Repository Proof</h3>
+<p><b>No public GitHub repository has been configured for CodeLock at the time of writing.</b> The
+repository field is therefore left without a URL rather than populated with a link that does not resolve.
+The equivalent proof is the submitted project folder itself, a verified backup snapshot and the offline
+verification record below. A reviewer can reproduce the checks from the folder without network access.</p>
+<table class=""><colgroup><col style="width:38mm"><col style="width:96mm"><col style="width:24mm"></colgroup><thead><tr><th class="">Evidence item</th><th class="">What it contains</th><th class="">Result</th></tr></thead><tbody><tr><td class="">Submitted folder and backup</td><td class="">Source, 19 modules, helper, schema, documentation and a dated snapshot; SHA-256 manifest of every file</td><td class="">46/46 verified</td></tr><tr><td class="">Offline self-test</td><td class="">Hosts, helper, judge, problems, database, exam and analytics checks</td><td class="">227/227 and 228/228</td></tr><tr><td class="">UI smoke test</td><td class="">Analytics tab, range filters and recommendation action</td><td class="">13/13</td></tr><tr><td class="">Mode flow harness</td><td class="">Exam and DSA paths in a temporary database</td><td class="">23/23</td></tr></tbody></table><figure class="figure"><img src="assets/fig-13-1-verification.svg" style="width:112mm"><figcaption class="caption">Figure 13.1: Final offline verification summary from the submitted build.</figcaption></figure>
+<h3>13.2 Source Inventory</h3>
+<table class=""><colgroup><col style="width:64mm"><col style="width:18mm"><col style="width:74mm"></colgroup><thead><tr><th class="">File</th><th class="c">Lines</th><th class="">Role</th></tr></thead><tbody><tr><td class="">main.py</td><td class="c">207</td><td class="">Entry point and command-line operations</td></tr><tr><td class="">codelock/gui.py</td><td class="c">1,878</td><td class="">Kiosk window, sign-in, mode chooser, watchdog</td></tr><tr><td class="">codelock/exam_ui.py</td><td class="c">1,736</td><td class="">Seven-tab exam workspace</td></tr><tr><td class="">codelock/db.py</td><td class="c">1,796</td><td class="">Accounts, progress, exam rows and both backends</td></tr><tr><td class="">codelock/selftest.py</td><td class="c">2,922</td><td class="">Offline verification suite</td></tr><tr><td class="">codelock/judge.py, problems.py</td><td class="c">1,806</td><td class="">Grading protocol, challenge bank and hidden tests</td></tr><tr><td class="">codelock/hosts_elevation.py, hosts_helper.ps1</td><td class="c">1,937</td><td class="">Helper verification, UAC client, recovery and the fixed helper</td></tr><tr><td class="">Other modules and SQL</td><td class="c">4,288</td><td class="">Exam, analytics, charts, AI, installer and schema</td></tr></tbody></table>
+<div class="note"><b>What is verified.</b> In the submitted folder, py_compile exited 0, the self-test passed
+227 checks with system Python and 228 through the virtual environment, the UI smoke test passed 13/13, and the
+mode flow harness passed 23/23. The hosts file was hash-checked before and after: it was not modified, and no
+UAC prompt or helper installation was performed.</div>
+<div class="page-foot"><span>Abhinandan Upadhyay &middot; UID 26MCA20229</span><span class="pg">Page 25</span></div></section>
+</body>
+</html>

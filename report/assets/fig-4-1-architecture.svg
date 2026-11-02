@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+<defs>
+  <marker id="head" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+    <path d="M0,0 L10,4 L0,8 z" fill="#475569"/>
+  </marker>
+  <marker id="headred" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+    <path d="M0,0 L10,4 L0,8 z" fill="#b91c1c"/>
+  </marker>
+  <style>
+    .t { font: 13px Segoe UI, Arial, sans-serif; fill: #1f2937; }
+    .bt { font: 700 15px Segoe UI, Arial, sans-serif; fill: #0f172a; }
+    .bs { font: 12.5px Segoe UI, Arial, sans-serif; fill: #334155; }
+    .layer { font: 700 11px Segoe UI, Arial, sans-serif; fill: #64748b; letter-spacing: 1.6px; }
+    .edge { font: 600 11px Segoe UI, Arial, sans-serif; fill: #475569; paint-order: stroke; stroke: #ffffff; stroke-width: 5px; }
+    .box { fill: #ffffff; stroke: #475569; stroke-width: 1.6; }
+    .gui { fill: #eff6ff; stroke: #1d4ed8; stroke-width: 1.7; }
+    .svc { fill: #f8fafc; stroke: #334155; stroke-width: 1.6; }
+    .exam { fill: #ecfdf5; stroke: #047857; stroke-width: 1.6; }
+    .lock { fill: #fef2f2; stroke: #b91c1c; stroke-width: 1.6; }
+    .data { fill: #f0fdf4; stroke: #15803d; stroke-width: 1.6; }
+    .ai { fill: #f5f3ff; stroke: #6d28d9; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .note { font: 11.5px Segoe UI, Arial, sans-serif; fill: #64748b; }
+    .arrow { fill: none; stroke: #475569; stroke-width: 1.9; marker-end: url(#head); }
+    .dash { fill: none; stroke: #6d28d9; stroke-width: 1.8; stroke-dasharray: 6 4; marker-end: url(#head); }
+    .arrow-red { fill: none; stroke: #b91c1c; stroke-width: 1.9; marker-end: url(#headred); }
+  </style>
+</defs>
+<rect width="1200" height="800" fill="#ffffff"/>
+<text x="40" y="30" class="layer">PRESENTATION LAYER</text><text x="40" y="236" class="layer">APPLICATION SERVICES</text><text x="40" y="436" class="layer">OPTIONAL INTEGRATION</text><text x="40" y="566" class="layer">OPERATING SYSTEM AND DATA</text><rect x="40" y="44" width="1120" height="158" rx="10" class="gui"/>
+<text x="55" y="72" class="bt">Tkinter kiosk GUI</text>
+<text x="55" y="98" class="bs">main.py  ·  codelock/gui.py  ·  always-on-top window · anti-paste editor · judge console</text><rect x="60" y="100" width="340" height="72" rx="8" class="box"/><text x="74" y="128" class="bt">Sign-in and mode chooser</text><text x="74" y="152" class="bs">student account · Exam / DSA question</text><rect x="420" y="100" width="340" height="72" rx="8" class="box"/><text x="434" y="128" class="bt">DSA practice</text><text x="434" y="152" class="bs">engineering track · editor · judge console</text><rect x="780" y="100" width="360" height="72" rx="8" class="box"/><text x="794" y="128" class="bt">Exam Preparation workspace</text><text x="794" y="152" class="bs">syllabus · notes · bank · practice · mock</text><rect x="40" y="250" width="209" height="104" rx="10" class="svc"/>
+<text x="55" y="278" class="bt">Judge</text>
+<text x="55" y="302" class="bs">subprocess harness</text>
+<text x="55" y="321" class="bs">3 s timeout</text>
+<text x="55" y="340" class="bs">trusted-parent grading</text><path d="M144.5,202 L144.5,250" class="arrow"/><rect x="267" y="250" width="209" height="104" rx="10" class="svc"/>
+<text x="282" y="278" class="bt">Problem bank</text>
+<text x="282" y="302" class="bs">15 challenges</text>
+<text x="282" y="321" class="bs">visible + hidden tests</text>
+<text x="282" y="340" class="bs">reference answers</text><path d="M371.5,202 L371.5,250" class="arrow"/><rect x="494" y="250" width="209" height="104" rx="10" class="svc"/>
+<text x="509" y="278" class="bt">Exam engine</text>
+<text x="509" y="302" class="bs">questions and scoring</text>
+<text x="509" y="321" class="bs">sessions and snapshots</text>
+<text x="509" y="340" class="bs">mastery analytics</text><path d="M598.5,202 L598.5,250" class="arrow"/><rect x="721" y="250" width="209" height="104" rx="10" class="svc"/>
+<text x="736" y="278" class="bt">Study generation</text>
+<text x="736" y="302" class="bs">source-grounded notes</text>
+<text x="736" y="321" class="bs">validated question banks</text>
+<text x="736" y="340" class="bs">opt-in AI transport</text><path d="M825.5,202 L825.5,250" class="arrow"/><rect x="948" y="250" width="209" height="104" rx="10" class="svc"/>
+<text x="963" y="278" class="bt">StudentStore</text>
+<text x="963" y="302" class="bs">accounts and progress</text>
+<text x="963" y="321" class="bs">exam workspaces</text>
+<text x="963" y="340" class="bs">SQLite or Oracle</text><path d="M1052.5,202 L1052.5,250" class="arrow"/><rect x="40" y="448" width="460" height="80" rx="10" class="ai"/>
+<text x="55" y="476" class="bs">AI provider (optional)</text>
+<text x="55" y="501" class="note">Ollama · Gemini · OpenAI-compatible · receives only workspace text</text><path d="M824,354 L824,414 L270,414 L270,448" class="dash"/><rect x="40" y="580" width="265" height="110" rx="10" class="lock"/>
+<text x="55" y="608" class="bt">HostsAuthority</text>
+<text x="55" y="632" class="bs">fixed PowerShell helper</text>
+<text x="55" y="651" class="bs">manifest + ACL checks</text>
+<text x="55" y="670" class="bs">one-shot UAC request</text><rect x="335" y="580" width="205" height="110" rx="10" class="lock"/>
+<text x="350" y="608" class="bt">Windows hosts file</text>
+<text x="350" y="632" class="bs">managed marker block</text>
+<text x="350" y="651" class="bs">re-read verification</text>
+<text x="350" y="670" class="bs">original restored</text><rect x="570" y="580" width="200" height="110" rx="10" class="svc"/>
+<text x="585" y="608" class="bt">ProcessKiller</text>
+<text x="585" y="632" class="bs">psutil / tasklist</text>
+<text x="585" y="651" class="bs">blocklisted apps</text>
+<text x="585" y="670" class="bs">every 2.5 seconds</text><rect x="800" y="580" width="175" height="110" rx="10" class="data"/>
+<text x="815" y="608" class="bt">SQLite</text>
+<text x="815" y="632" class="bs">default local store</text>
+<text x="815" y="651" class="bs">data/codelock.db</text>
+<text x="815" y="670" class="bs">student and exam records</text><rect x="1005" y="580" width="155" height="110" rx="10" class="ai"/>
+<text x="1020" y="608" class="bt">Oracle 19c+</text>
+<text x="1020" y="632" class="bs">optional shared store</text>
+<text x="1020" y="651" class="bs">PL/SQL package</text>
+<text x="1020" y="670" class="bs">same logical schema</text><path d="M40,170 L26,170 L26,635 L40,635" class="arrow"/><text x="22" y="470" class="edge" transform="rotate(-90 22 470)">lock / unlock</text><path d="M305,635 L335,635" class="arrow"/><path d="M1000,354 L1000,400 L887,400 L887,580" class="arrow"/><path d="M1085,354 L1085,580" class="dash"/><text x="40" y="736" class="note">The hosts helper is installed separately by an administrator. The GUI never installs or elevates itself;</text><text x="40" y="756" class="note">if the helper is unavailable, website blocking reports an honest unavailable status and the rest of the app still starts.</text></svg>

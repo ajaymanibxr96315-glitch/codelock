@@ -1,0 +1,10 @@
+# Core runtime: Python 3.10+ standard library and Tkinter only.
+# Required for PDF syllabus upload. TXT and DOCX extraction use the standard library.
+pypdf>=6.0
+
+# Optional: faster desktop-process cleanup. CodeLock falls back to
+# tasklist/taskkill on Windows and pkill on Linux when psutil is absent.
+# psutil>=5.9
+
+# Optional: only for the Oracle/PL-SQL progress backend. SQLite is the default.
+# oracledb>=2.0
