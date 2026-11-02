@@ -5,8 +5,8 @@ venv/
 backups/
 *.codelock.bak
 data/
-exam_ui_test.db
 *.db
 *.db-journal
 *.db-wal
 *.db-shm
+docs/audit/

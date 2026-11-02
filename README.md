@@ -894,23 +894,14 @@ Verify the real paths once on your own machine with `--dry-run` first, then run 
 installer on a trusted copy, then a short real session with `--restore` ready. Real Windows
 enforcement is not certified by the offline suite.
 
-Final submission check on 2026-11-02: `py_compile` passed; `--self-test` 234/234 with system Python
-(no `pypdf`) and 235/235 through the launcher/venv (both PDF checks); `--self-test-ui` 13/13; the
-real `--dry-run` entry point launched through both system Python and the project venv and exited 0
-on window close; a live GUI session against the real student database exercised registration,
-workspace creation, syllabus upload/approval, grounded notes, an offline question bank, MCQ practice,
-written practice and a mock exam; a complete DSA challenge (wrong answer, then correct answer,
-confirmation, reward timer, progress) was exercised in a temporary database. See
-`CODELOCK_FINAL_SUBMISSION_REPORT.md` for the exact commands and evidence.
+Run both commands from the project directory before making changes to system settings:
 
-Post-submission update on 2026-11-03 (syllabus upload and fullscreen): `py_compile` passed;
-`--self-test` 237/237 with both system Python (pypdf loaded from the project venv) and the project
-venv; `--self-test-ui` 18/18. A live GUI run through the real `CodeLockApp` (temporary database, real
-hosts file hash unchanged) registered a student, verified the main window and exam workspace are
-fullscreen, created a workspace, uploaded a generated PDF syllabus and a generated `.docx` syllabus
-through the real **UPLOAD SYLLABUS** button, approved both extracted outlines, generated an offline
-question bank from the PDF source, and opened a fullscreen practice runner with **LEAVE SESSION**
-(12/12 live checks). The same PDF upload was then repeated with the system Python that has no
-`pypdf` installed, and it extracted topics with no dependency error (3/3 checks). Legacy `.doc`
-uploads now return conversion guidance instead of a generic
-parse error.
+```bash
+python main.py --self-test
+python main.py --self-test-ui
+```
+
+These checks use temporary databases and do not modify the system hosts file. They cover the
+offline application logic and Tk workflows; they do not certify real UAC prompts, helper
+installation, hosts-file enforcement, or process blocking. Use `python main.py --dry-run` to
+exercise the application without enabling enforcement.
